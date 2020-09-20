@@ -2,6 +2,8 @@
 ## i have used `tput civis`  for hide cursor and for normal state `tupt cnorm`
 ## Note: for "tput" function first you should install **ncurses-utils** package.. then you can use the code..
 
+arch=`uname -m`
+
 clear;
 echo "";
 sleep 1
@@ -54,8 +56,13 @@ if [ -d "$HOME/metasploit-framework" ]; then
 	else
 		cd apktool
 		echo -e "\e[1;34m[*] \e[32mDownloading... apktool.jar\e[0m";
-		(axel -kaq "https://archive.org/download/5.0.23.tar/apktool.jar")
-		cd -
+		if [ "$arch" ==  "aarch64" ]; then
+			(axel -kaq "https://archive.org/download/apktool_202009/apktool.jar")
+			cd -
+		else
+			(axel -kaq "https://archive.org/download/5.0.23.tar/apktool.jar")
+			cd -
+		fi
 	fi
 	if [ -e apktool/.apktool/framework-res.apk ]; then
 		echo
