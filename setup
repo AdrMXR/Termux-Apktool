@@ -4,9 +4,16 @@
 
 arch=`uname -m`
 
-clear;
-echo "";
-sleep 1
+echo -e "\e[1;34m[*] \e[32mDownloading... apktool.jar\e[0m";
+cd apktool
+if [ "$arch" ==  "aarch64" ]; then
+	(axel -kaq "https://archive.org/download/apktool_202009/apktool.jar")
+	cd -
+else
+	(axel -kaq "https://archive.org/download/5.0.23.tar/apktool.jar")
+	cd -
+fi
+
 echo -e "\e[1;34m[*] \e[32minstall packages....\e[0m";
 echo "";
 (apt update && apt upgrade -y) &> /dev/null;
@@ -50,20 +57,6 @@ sleep 2
 echo -e "\e[1;34m[*] \e[32mInstalling Apktool...\e[0m";
 if [ -d "$HOME/metasploit-framework" ]; then
 	echo -e "\e[1;34m[*] \e[32mYour metasploit-framework is present on Home directory....\e[0m";
-	rm -rf $PREFIX/bin/apktool;
-	if [ -e apktool/apktool.jar ]; then
-		echo
-	else
-		cd apktool
-		echo -e "\e[1;34m[*] \e[32mDownloading... apktool.jar\e[0m";
-		if [ "$arch" ==  "aarch64" ]; then
-			(axel -kaq "https://archive.org/download/apktool_202009/apktool.jar")
-			cd -
-		else
-			(axel -kaq "https://archive.org/download/5.0.23.tar/apktool.jar")
-			cd -
-		fi
-	fi
 	if [ -e apktool/.apktool/framework-res.apk ]; then
 		echo
 	else
