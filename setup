@@ -43,6 +43,7 @@ echo -e "\e[1;34m[*] \e[32mDownloding Hax4us openjdk-8 script..\e[0m";
 (patch installjava < apktool/.apktool/java.patch) &> /dev/null;
 bash installjava;
 echo
+fi
 
 if [ -e ~/.bashrc ]; then
 	(patch $PREFIX/etc/bash.bashrc < apktool/.apktool/bash.patch) &> /dev/null
@@ -105,7 +106,5 @@ else
 fi
 rm -rf installjava
 termux-wake-unlock;
-fi
-fi
 exit 0
 
