@@ -4,6 +4,7 @@
 
 arch=`uname -m`
 
+echo "";
 echo -e "\e[1;34m[*] \e[32mDownloading... apktool.jar\e[0m";
 cd apktool
 if [ "$arch" ==  "aarch64" ]; then
@@ -15,7 +16,6 @@ else
 fi
 
 echo -e "\e[1;34m[*] \e[32minstall packages....\e[0m";
-echo "";
 (apt update && apt upgrade -y) &> /dev/null;
 (apt install axel figlet pv ncurses-utils binutils coreutils wget git proot termux-api tar procps grep -y) &> /dev/null;
 termux-wake-lock;
@@ -97,7 +97,6 @@ elif [ -d "$PREFIX/opt/metasploit-framework" ]; then
         (patch $PREFIX/opt/metasploit-framework/lib/msf/core/payload/apk.rb < apktool/.apktool/apk.rb.patch) &> /dev/null
         cp apktool/.apktool/framework-res.apk $PREFIX/share/
 	echo -e "\e[1;34m[*] \e[32mApktool successfully installed..\e[0m";
-	cd;cd ..;ln -s /storage/emulated/0/ sdcard;cd;
 	echo ""
 else
 	echo -e "\e[1;34m[*] \e[32mYou have to install metasploit-framework first...\e[0m";
