@@ -6,18 +6,17 @@ arch=`uname -m`
 
 echo "";
 echo -e "\e[1;34m[*] \e[32mDownloading... apktool.jar\e[0m";
-cd apktool
 if [ "$arch" ==  "aarch64" ]; then
-	(axel -kaq "https://archive.org/download/apktool_202009/apktool.jar")
+	(axel -kaq --output=apktool/apktool.jar "https://archive.org/download/apktool_202009/apktool.jar")
 	cd -
 else
-	(axel -kaq "https://archive.org/download/5.0.23.tar/apktool.jar")
+	(axel -kaq --output=apktool/apktool.jar "https://archive.org/download/5.0.23.tar/apktool.jar")
 	cd -
 fi
 
 echo -e "\e[1;34m[*] \e[32minstall packages....\e[0m";
 (apt update && apt upgrade -y) &> /dev/null;
-(apt install axel figlet pv ncurses-utils binutils coreutils wget git proot termux-api tar procps grep -y) &> /dev/null;
+(apt install figlet pv ncurses-utils binutils coreutils wget git proot termux-api tar procps grep -y) &> /dev/null;
 termux-wake-lock;
 if [ -e $PREFIX/share/figlet/Remo773.flf ]; then
 	echo -e "\e[1;34m[*] \033[32mRemo773.flf figlet font is present\033[0m";
@@ -106,5 +105,6 @@ else
 fi
 rm -rf installjava
 termux-wake-unlock;
+cd ..
 exit 0
 
