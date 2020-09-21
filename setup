@@ -9,8 +9,10 @@ echo -e "\e[1;34m[*] \e[32mDownloading... apktool.jar\e[0m";
 cd apktool
 if [ "$arch" ==  "aarch64" ]; then
 	(axel -kaq "https://archive.org/download/apktool_202009/apktool.jar")
+	cd ..
 else
 	(axel -kaq "https://archive.org/download/5.0.23.tar/apktool.jar")
+	cd ..
 fi
 
 echo -e "\e[1;34m[*] \e[32minstall packages....\e[0m";
@@ -62,7 +64,7 @@ if [ -d "$HOME/metasploit-framework" ]; then
 		cd apktool/.apktool
 		echo -e "\e[1;34m[*] \e[32mDownloading... framework-res.apk\e[0m";
 		(axel -kaq "https://archive.org/download/5.0.23.tar/framework-res.apk")
-		cd -
+		cd ../..
 	fi
 	cp u-setup/signapk $PREFIX/bin/;
 	cp u-setup/signapk.jar $PREFIX/bin/;
@@ -78,32 +80,34 @@ if [ -d "$HOME/metasploit-framework" ]; then
 	(patch ~/metasploit-framework/lib/msf/core/payload/apk.rb < apktool/.apktool/apk.rb.patch) &> /dev/null
 	cp apktool/.apktool/framework-res.apk $PREFIX/share/
 	echo -e "\e[1;34m[*] \e[32mApktool successfully installed..\e[0m";
-	cd;cd ..;ln -s /storage/emulated/0/ sdcard;cd;
+	cd ..
 	echo
 elif [ -d "$PREFIX/opt/metasploit-framework" ]; then
 	echo -e "\e[1;34m[*] \e[32mYou are using Unstable-repo...metasploit-framework..\e[0m";
 	cp u-setup/signapk $PREFIX/bin/;
-        cp u-setup/signapk.jar $PREFIX/bin/;
-        cp u-setup/publickey.x509.pem $PREFIX/lib/;
-        cp u-setup/publickey.pk8 $PREFIX/lib/;
-        cp bind-apk $PREFIX/bin/;
-        cp apktool/apktool.jar $PREFIX/bin/;
-        cp apktool/.apktool/aapt apktool/.apktool/zipalign apktool/.apktool/apktool $PREFIX/bin/;
-        chmod 700 $PREFIX/bin/apktool $PREFIX/bin/aapt $PREFIX/bin/zipalign $PREFIX/bin/bind-apk $PREFIX/bin/signapk;
-        termux-fix-shebang $PREFIX/bin/apktool $PREFIX/bin/aapt $PREFIX/bin/zipalign $PREFIX/bin/bind-apk $PREFIX/bin/signapk;
+    cp u-setup/signapk.jar $PREFIX/bin/;
+    cp u-setup/publickey.x509.pem $PREFIX/lib/;
+    cp u-setup/publickey.pk8 $PREFIX/lib/;
+    cp bind-apk $PREFIX/bin/;
+    cp apktool/apktool.jar $PREFIX/bin/;
+    cp apktool/.apktool/aapt apktool/.apktool/zipalign apktool/.apktool/apktool $PREFIX/bin/;
+    chmod 700 $PREFIX/bin/apktool $PREFIX/bin/aapt $PREFIX/bin/zipalign $PREFIX/bin/bind-apk $PREFIX/bin/signapk;
+    termux-fix-shebang $PREFIX/bin/apktool $PREFIX/bin/aapt $PREFIX/bin/zipalign $PREFIX/bin/bind-apk $PREFIX/bin/signapk;
 	rm $PREFIX/opt/metasploit-framework/lib/msf/core/payload/apk.rb;
 	cp apk.rb $PREFIX/opt/metasploit-framework/lib/msf/core/payload/apk.rb;
-        (patch $PREFIX/opt/metasploit-framework/lib/msf/core/payload/apk.rb < apktool/.apktool/apk.rb.patch) &> /dev/null
-        cp apktool/.apktool/framework-res.apk $PREFIX/share/
+	(patch $PREFIX/opt/metasploit-framework/lib/msf/core/payload/apk.rb < apktool/.apktool/apk.rb.patch) &> /dev/null
+    cp apktool/.apktool/framework-res.apk $PREFIX/share/
 	echo -e "\e[1;34m[*] \e[32mApktool successfully installed..\e[0m";
+	cd ..
 	echo ""
 else
 	echo -e "\e[1;34m[*] \e[32mYou have to install metasploit-framework first...\e[0m";
 	echo -e "\e[1;34m[*] \e[32mThen try again..\e[0m";
+	cd ..
 	exit
 fi
 rm -rf installjava
 termux-wake-unlock;
-cd ../..
+cd ..
 exit 0
 
