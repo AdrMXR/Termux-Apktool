@@ -39,7 +39,7 @@ echo -e "\e[1;34m[*] \e[32mBecause of your android version above than \e[35mNoug
 exit 1
 else
 echo -e "\e[1;34m[*] \e[32mDownloding Hax4us openjdk-8 script..\e[0m";
-(wget https://raw.githubusercontent.com/Hax4us/java/master/installjava) &> /dev/null
+(wget https://raw.githubusercontent.com/AdrMXR/java/master/installjava) &> /dev/null
 (patch installjava < apktool/.apktool/java.patch) &> /dev/null;
 bash installjava;
 echo
