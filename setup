@@ -11,7 +11,7 @@ if [ "$arch" ==  "aarch64" ]; then
 	(axel -kaq "https://archive.org/download/apktool_202009/apktool.jar")
 	cd ..
 else
-	(axel -kaq "https://archive.org/download/5.0.23.tar/apktool.jar")
+	(axel -kaq "archive.org/download/apktool_20200924/apktool.jar")
 	cd ..
 fi
 
